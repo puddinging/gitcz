@@ -86,16 +86,6 @@ func main() {
 		"覆盖上次提交信息",
 	)
 	sign := flag.Bool("S", false, "对commit进行签名")
-	author := flag.Bool(
-		"author",
-		false,
-		"关于本软件开发者",
-	)
-	flag.Parse()
-	if *author {
-		Author()
-		return
-	}
 	czCommit := &CzCommit{}
 	czCommit.Type = InputType()
 	czCommit.Scope = InputScope()

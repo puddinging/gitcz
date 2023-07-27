@@ -236,3 +236,11 @@ func GenerateCommit(czCommit *CzCommit) string {
 	}
 	return commit
 }
+
+/*
+*
+打印帮助信息
+*/
+func help() {
+	print("打印帮助信息")
+}

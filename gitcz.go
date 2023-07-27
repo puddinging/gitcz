@@ -243,4 +243,5 @@ func GenerateCommit(czCommit *CzCommit) string {
 */
 func help() {
 	print("打印帮助信息")
+	print("打印帮助信息")
 }

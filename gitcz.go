@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"flag"
 	"fmt"
 	"github.com/peterh/liner"
@@ -37,49 +38,6 @@ var (
 	InputClosesPrompt         = "如果本次提交针对某个issue,列出关闭的issues(选填): "
 )
 
-var CzTypeList = []CzType{
-	{
-		Type:    ":tada:",
-		Message: "初始化:	第一次提交",
-	},
-	{
-		Type:    ":sparkles:",
-		Message: "功能:	一个新的功能",
-	},
-	{
-		Type:    ":bug:",
-		Message: "修复:	修复一个Bug",
-	},
-	{
-		Type:    ":memo:",
-		Message: "文档:	变更的只有文档",
-	},
-	{
-		Type:    ":art:",
-		Message: "格式:	空格, 分号等格式修复'",
-	},
-	{
-		Type:    ":hammer:",
-		Message: "重构:	代码重构，注意和特性、修复区分开",
-	},
-	{
-		Type:    ":zap:",
-		Message: "性能:	提升性能",
-	},
-	{
-		Type:    ":white_check_mark:",
-		Message: "测试:	添加一个测试",
-	},
-	{
-		Type:    "chore",
-		Message: "工具:	开发工具变动(构建、脚手架工具等)",
-	},
-	{
-		Type:    ":twisted_rightwards_arrows:",
-		Message: "分支合并",
-	},
-}
-
 func main() {
 	amend := flag.Bool(
 		"amend",
@@ -87,6 +45,13 @@ func main() {
 		"覆盖上次提交信息",
 	)
 	line := liner.NewLiner()
+	line.SetCtrlCAborts(true)
+	defer func(line *liner.State) {
+		err := line.Close()
+		if err != nil {
+			return
+		}
+	}(line)
 	sign := flag.Bool("S", false, "对commit进行签名")
 	czCommit := &CzCommit{}
 	czCommit.Type = InputType(line)
@@ -96,7 +61,6 @@ func main() {
 	czCommit.BreakingChange = InputBreakingChange(line)
 	czCommit.Closes = InputCloses(line)
 	commit := GenerateCommit(czCommit)
-	defer line.Close()
 	if err := GitCommit(commit, *amend, *sign); err != nil {
 		fmt.Println(err)
 	}
@@ -159,7 +123,13 @@ func InputType(line *liner.State) *CzType {
 }
 
 func InputScope(line *liner.State) *string {
-	text, _ := line.Prompt(InputScopePrompt)
+	text, err := line.Prompt(InputScopePrompt)
+	if err != nil {
+		if errors.Is(err, liner.ErrPromptAborted) {
+			fmt.Println("\nAborted")
+			os.Exit(0)
+		}
+	}
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
@@ -170,7 +140,13 @@ func InputScope(line *liner.State) *string {
 }
 
 func InputSubject(line *liner.State) *string {
-	text, _ := line.Prompt(InputSubjectPrompt)
+	text, err := line.Prompt(InputSubjectPrompt)
+	if err != nil {
+		if errors.Is(err, liner.ErrPromptAborted) {
+			fmt.Println("\nAborted")
+			os.Exit(0)
+		}
+	}
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
@@ -181,7 +157,13 @@ func InputSubject(line *liner.State) *string {
 }
 
 func InputBody(line *liner.State) *string {
-	text, _ := line.Prompt(InputBodyPrompt)
+	text, err := line.Prompt(InputBodyPrompt)
+	if err != nil {
+		if errors.Is(err, liner.ErrPromptAborted) {
+			fmt.Println("\nAborted")
+			os.Exit(0)
+		}
+	}
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
@@ -192,7 +174,13 @@ func InputBody(line *liner.State) *string {
 }
 
 func InputBreakingChange(line *liner.State) *string {
-	text, _ := line.Prompt(InputBreakingChangePrompt)
+	text, err := line.Prompt(InputBreakingChangePrompt)
+	if err != nil {
+		if errors.Is(err, liner.ErrPromptAborted) {
+			fmt.Println("\nAborted")
+			os.Exit(0)
+		}
+	}
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
@@ -203,7 +191,13 @@ func InputBreakingChange(line *liner.State) *string {
 }
 
 func InputCloses(line *liner.State) *string {
-	text, _ := line.Prompt(InputClosesPrompt)
+	text, err := line.Prompt(InputClosesPrompt)
+	if err != nil {
+		if errors.Is(err, liner.ErrPromptAborted) {
+			fmt.Println("\nAborted")
+			os.Exit(0)
+		}
+	}
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"bytes"
 	"errors"
 	"flag"
@@ -21,8 +20,6 @@ type CzCommit struct {
 	BreakingChange *string
 	Closes         *string
 }
-
-var StdinInput = bufio.NewReader(os.Stdin)
 
 var (
 	InputTypePrompt           = "选择或输入一个提交类型(必填): "

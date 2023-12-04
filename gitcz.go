@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"github.com/peterh/liner"
 )
 
 type CzType struct {
@@ -134,13 +135,13 @@ func GitCommit(commit string, amend bool, sign bool) (err error) {
 }
 
 func InputType() *CzType {
+	line := liner.NewLiner()
 	typeNum := len(CzTypeList)
 	for i := 0; i < typeNum; i++ {
 		fmt.Printf("[%d] %s:\t%s\n", i+1, CzTypeList[i].Type, CzTypeList[i].Message)
 	}
-	fmt.Print(InputTypePrompt)
-	text, _ := StdinInput.ReadString('\n')
-	text = strings.TrimSpace(text)
+	text, _ := line.Prompt(InputTypePrompt)
+    text = strings.TrimSpace(text)
 	selectId, err := strconv.Atoi(text)
 	if err == nil && (selectId > 0 && selectId <= typeNum) {
 		NewLine()
@@ -153,6 +154,7 @@ func InputType() *CzType {
 		}
 	}
 	NewLine()
+	defer line.Close()
 	return InputType()
 }
 

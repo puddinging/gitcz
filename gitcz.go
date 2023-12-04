@@ -5,11 +5,11 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"github.com/peterh/liner"
 	"os"
 	"os/exec"
 	"strconv"
 	"strings"
-	"github.com/peterh/liner"
 )
 
 type CzType struct {
@@ -86,15 +86,17 @@ func main() {
 		false,
 		"覆盖上次提交信息",
 	)
+	line := liner.NewLiner()
 	sign := flag.Bool("S", false, "对commit进行签名")
 	czCommit := &CzCommit{}
-	czCommit.Type = InputType()
-	czCommit.Scope = InputScope()
-	czCommit.Subject = InputSubject()
-	czCommit.Body = InputBody()
-	czCommit.BreakingChange = InputBreakingChange()
-	czCommit.Closes = InputCloses()
+	czCommit.Type = InputType(line)
+	czCommit.Scope = InputScope(line)
+	czCommit.Subject = InputSubject(line)
+	czCommit.Body = InputBody(line)
+	czCommit.BreakingChange = InputBreakingChange(line)
+	czCommit.Closes = InputCloses(line)
 	commit := GenerateCommit(czCommit)
+	defer line.Close()
 	if err := GitCommit(commit, *amend, *sign); err != nil {
 		fmt.Println(err)
 	}
@@ -134,14 +136,13 @@ func GitCommit(commit string, amend bool, sign bool) (err error) {
 	return nil
 }
 
-func InputType() *CzType {
-	line := liner.NewLiner()
+func InputType(line *liner.State) *CzType {
 	typeNum := len(CzTypeList)
 	for i := 0; i < typeNum; i++ {
 		fmt.Printf("[%d] %s:\t%s\n", i+1, CzTypeList[i].Type, CzTypeList[i].Message)
 	}
 	text, _ := line.Prompt(InputTypePrompt)
-    text = strings.TrimSpace(text)
+	text = strings.TrimSpace(text)
 	selectId, err := strconv.Atoi(text)
 	if err == nil && (selectId > 0 && selectId <= typeNum) {
 		NewLine()
@@ -154,49 +155,33 @@ func InputType() *CzType {
 		}
 	}
 	NewLine()
-	defer line.Close()
-	return InputType()
+	return InputType(line)
 }
 
-func InputScope() *string {
-	fmt.Print(InputScopePrompt)
-	text, _ := StdinInput.ReadString('\n')
+func InputScope(line *liner.State) *string {
+	text, _ := line.Prompt(InputScopePrompt)
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
 		return &text
 	}
 	NewLine()
-	return InputScope()
+	return InputScope(line)
 }
 
-func InputSubject() *string {
-	fmt.Print(InputSubjectPrompt)
-	text, _ := StdinInput.ReadString('\n')
+func InputSubject(line *liner.State) *string {
+	text, _ := line.Prompt(InputSubjectPrompt)
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
 		return &text
 	}
 	NewLine()
-	return InputSubject()
+	return InputSubject(line)
 }
 
-func InputBody() *string {
-	fmt.Print(InputBodyPrompt)
-	text, _ := StdinInput.ReadString('\n')
-	text = strings.TrimSpace(text)
-	if text != "" {
-		NewLine()
-		return &text
-	}
-	NewLine()
-	return nil
-}
-
-func InputBreakingChange() *string {
-	fmt.Print(InputBreakingChangePrompt)
-	text, _ := StdinInput.ReadString('\n')
+func InputBody(line *liner.State) *string {
+	text, _ := line.Prompt(InputBodyPrompt)
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()
@@ -206,9 +191,19 @@ func InputBreakingChange() *string {
 	return nil
 }
 
-func InputCloses() *string {
-	fmt.Print(InputClosesPrompt)
-	text, _ := StdinInput.ReadString('\n')
+func InputBreakingChange(line *liner.State) *string {
+	text, _ := line.Prompt(InputBreakingChangePrompt)
+	text = strings.TrimSpace(text)
+	if text != "" {
+		NewLine()
+		return &text
+	}
+	NewLine()
+	return nil
+}
+
+func InputCloses(line *liner.State) *string {
+	text, _ := line.Prompt(InputClosesPrompt)
 	text = strings.TrimSpace(text)
 	if text != "" {
 		NewLine()

@@ -13,11 +13,6 @@ import (
 	"strings"
 )
 
-type CzType struct {
-	Type    string
-	Message string
-}
-
 type CzCommit struct {
 	Type           *CzType
 	Scope          *string
@@ -53,6 +48,7 @@ func main() {
 		}
 	}(line)
 	sign := flag.Bool("S", false, "对commit进行签名")
+	Init()
 	czCommit := &CzCommit{}
 	czCommit.Type = InputType(line)
 	czCommit.Scope = InputScope(line)
@@ -102,10 +98,16 @@ func GitCommit(commit string, amend bool, sign bool) (err error) {
 
 func InputType(line *liner.State) *CzType {
 	typeNum := len(CzTypeList)
-	for i := 0; i < typeNum; i++ {
-		fmt.Printf("[%d] %s:\t%s\n", i+1, CzTypeList[i].Type, CzTypeList[i].Message)
+	for i, czType := range CzTypeList {
+		fmt.Printf("[%2d] %-30s: %s\n", i+1, czType.Type, czType.Message)
 	}
-	text, _ := line.Prompt(InputTypePrompt)
+	text, err := line.Prompt(InputTypePrompt)
+	if err != nil {
+		if errors.Is(err, liner.ErrPromptAborted) {
+			fmt.Println("\nAborted")
+			os.Exit(0)
+		}
+	}
 	text = strings.TrimSpace(text)
 	selectId, err := strconv.Atoi(text)
 	if err == nil && (selectId > 0 && selectId <= typeNum) {

@@ -1,31 +1,10 @@
 [
   {
-    "emoji": "调色板",
-    "entity": "&#x1f3a8;",
-    "code": ":art:",
-    "description": "改进代码结构/代码格式",
-    "name": "art"
-  },
-  {
-    "emoji": "闪电",
-    "entity": "⚡",
-    "code": ":zap:",
-    "description": "提升性能",
-    "name": "zap"
-  },
-  {
-    "emoji": "火焰",
-    "entity": "&#x1f525;",
-    "code": ":fire:",
-    "description": "移除代码或文件",
-    "name": "fire"
-  },
-  {
-    "emoji": "bug",
-    "entity": "&#x1f41b;",
-    "code": ":bug:",
-    "description": "修复bug",
-    "name": "bug"
+    "emoji": "庆祝",
+    "entity": "",
+    "code": ":tada:",
+    "description": "初次提交",
+    "name": "tada"
   },
   {
     "emoji": "火花",
@@ -35,6 +14,13 @@
     "name": "sparkles"
   },
   {
+    "emoji": "bug",
+    "entity": "&#x1f41b;",
+    "code": ":bug:",
+    "description": "修复bug",
+    "name": "bug"
+  },
+  {
     "emoji": "备忘录",
     "entity": "&#x1f4dd;",
     "code": ":memo:",
@@ -42,25 +28,74 @@
     "name": "memo"
   },
   {
-    "emoji": "火箭",
-    "entity": "&#x1f680;",
-    "code": ":rocket:",
-    "description": "部署功能",
-    "name": "rocket"
+    "emoji": "闪电",
+    "entity": "⚡",
+    "code": ":zap:",
+    "description": "提升性能",
+    "name": "zap"
   },
   {
-    "emoji": "口红",
-    "entity": "&#ff99cc;",
-    "code": ":lipstick:",
-    "description": "更新ui和样式文件",
-    "name": "lipstick"
+    "emoji": "循环箭头",
+    "entity": "♲",
+    "code": ":recycle:",
+    "description": "重构代码",
+    "name": "recycle"
   },
   {
-    "emoji": "庆祝",
-    "entity": "",
-    "code": ":tada:",
-    "description": "初次提交",
-    "name": "tada"
+    "emoji": "蒙眼猴子",
+    "entity": "&#8bdfe7;",
+    "code": ":see_no_evil:",
+    "description": "添加或更新.gitignore文件",
+    "name": "see-no-evil"
+  },
+  {
+    "emoji": "地球",
+    "entity": "",
+    "code": ":globe_with_meridians:",
+    "description": "国际化与本地化",
+    "name": "globe-with-meridians"
+  },
+  {
+    "emoji": "扳手",
+    "entity": "&#x1f527;",
+    "code": ":wrench:",
+    "description": "修改配置文件",
+    "name": "wrench"
+  },
+  {
+    "emoji": "调色板",
+    "entity": "&#x1f3a8;",
+    "code": ":art:",
+    "description": "改进代码结构/代码格式",
+    "name": "art"
+  },
+  {
+    "emoji": "火焰",
+    "entity": "&#x1f525;",
+    "code": ":fire:",
+    "description": "移除代码或文件",
+    "name": "fire"
+  },
+  {
+    "emoji": "合并箭头",
+    "entity": "",
+    "code": ":twisted_rightwards_arrows:",
+    "description": "合并分支",
+    "name": "twisted-rightwards-arrows"
+  },
+  {
+    "emoji": "工人",
+    "entity": "&#x1f477;",
+    "code": ":construction_worker:",
+    "description": "修复ci构建问题",
+    "name": "construction-worker"
+  },
+  {
+    "emoji": "鲸鱼",
+    "entity": "&#x1f433;",
+    "code": ":whale:",
+    "description": "docker相关工作",
+    "name": "whale"
   },
   {
     "emoji": "复选框",
@@ -68,27 +103,6 @@
     "code": ":white_check_mark:",
     "description": "增加测试",
     "name": "white-check-mark"
-  },
-  {
-    "emoji": "锁",
-    "entity": "&#x1f512;",
-    "code": ":lock:",
-    "description": "修复安全问题",
-    "name": "lock"
-  },
-  {
-    "emoji": "书签",
-    "entity": "&#x1f516;",
-    "code": ":bookmark:",
-    "description": "发行/版本标签",
-    "name": "bookmark"
-  },
-  {
-    "emoji": "绿心",
-    "entity": "&#x1f49a;",
-    "code": ":green_heart:",
-    "description": "修复ci构建问题",
-    "name": "green-heart"
   },
   {
     "emoji": "下降箭头",
@@ -108,22 +122,8 @@
     "emoji": "图钉",
     "entity": "&#x1f4cc;",
     "code": ":pushpin:",
-    "description": "将依赖关系固定到特定版本。",
+    "description": "将依赖关系固定到特定版本",
     "name": "pushpin"
-  },
-  {
-    "emoji": "工人",
-    "entity": "&#x1f477;",
-    "code": ":construction_worker:",
-    "description": "添加ci构建系统",
-    "name": "construction-worker"
-  },
-  {
-    "emoji": "循环箭头",
-    "entity": "♲",
-    "code": ":recycle:",
-    "description": "重构代码。",
-    "name": "recycle"
   },
   {
     "emoji": "减号",
@@ -133,66 +133,10 @@
     "name": "heavy-minus-sign"
   },
   {
-    "emoji": "鲸鱼",
-    "entity": "&#x1f433;",
-    "code": ":whale:",
-    "description": "docker相关工作",
-    "name": "whale"
-  },
-  {
     "emoji": "加号",
     "entity": "➕",
     "code": ":heavy_plus_sign:",
     "description": "增加一个依赖",
     "name": "heavy-plus-sign"
-  },
-  {
-    "emoji": "扳手",
-    "entity": "&#x1f527;",
-    "code": ":wrench:",
-    "description": "修改配置文件",
-    "name": "wrench"
-  },
-  {
-    "emoji": "地球",
-    "entity": "",
-    "code": ":globe_with_meridians:",
-    "description": "国际化与本地化",
-    "name": "globe-with-meridians"
-  },
-  {
-    "emoji": "合并箭头",
-    "entity": "",
-    "code": ":twisted_rightwards_arrows:",
-    "description": "合并分支。",
-    "name": "twisted-rightwards-arrows"
-  },
-  {
-    "emoji": "箱子",
-    "entity": "&#1f4e6;",
-    "code": ":package:",
-    "description": "更新编译的文件或包。",
-    "name": "package"
-  },
-  {
-    "emoji": "文档",
-    "entity": "&#1f4c4;",
-    "code": ":page_facing_up:",
-    "description": "添加或更新许可证。",
-    "name": "page-facing-up"
-  },
-  {
-    "emoji": "小丑",
-    "entity": "嵐",
-    "code": ":clown_face:",
-    "description": "嘲笑事物。",
-    "name": "clown-face"
-  },
-  {
-    "emoji": "蒙眼猴子",
-    "entity": "&#8bdfe7;",
-    "code": ":see_no_evil:",
-    "description": "添加或更新.gitignore文件。",
-    "name": "see-no-evil"
   }
 ]

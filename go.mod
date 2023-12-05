@@ -3,7 +3,8 @@ module github.com/puddinging/gitcz
 go 1.20
 
 require (
-	github.com/mattn/go-runewidth v0.0.3 // indirect
+	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/peterh/liner v1.2.2 // indirect
-	golang.org/x/sys v0.0.0-20211117180635-dee7805ff2e1 // indirect
+	github.com/rivo/uniseg v0.4.4 // indirect
+	golang.org/x/sys v0.15.0 // indirect
 )

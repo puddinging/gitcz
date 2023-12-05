@@ -1,32 +1,45 @@
-name: Go Tests & Build
+name: Build and Release
 
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
 
 jobs:
   build:
     name: Build & Test
     runs-on: ubuntu-latest
     steps:
+
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
         with:
           go-version: 1.16
+
       - name: Check out code
         uses: actions/checkout@v2
+
       - name: Get dependencies
         run: go mod download
+
       - name: Test
         run: go test ./...
-      - name: Build
+
+      - name: Build Executables
         run: |
-          GOOS=windows GOARCH=amd64 go build -o ${{ github.workspace }}/build/myapp_windows_amd64.exe
-          GOOS=darwin GOARCH=amd64 go build -o ${{ github.workspace }}/build/myapp_macos_amd64
-          GOOS=linux GOARCH=amd64 go build -o ${{ github.workspace }}/build/myapp_linux_amd64
-      - name: Archive production artifacts
+          mkdir -p build/linux/amd64 build/windows/amd64 build/macos/amd64
+          GOOS=linux GOARCH=amd64 go build -o build/linux/amd64/gitcz
+          GOOS=windows GOARCH=amd64 go build -o build/windows/amd64/gitcz.exe
+          GOOS=darwin GOARCH=amd64 go build -o build/macos/amd64/gitcz
+
+      - name: Archive executables
         uses: actions/upload-artifact@v2
         with:
-          name: executables
-          path: ${{ github.workspace }}/build/*
+          name: gitcz
+          path: build
+
+      - name: Publish to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/**
+          token: ${{ secrets.GITHUB_TOKEN }}

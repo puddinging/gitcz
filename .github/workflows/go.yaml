@@ -1,0 +1,32 @@
+name: Go Tests & Build
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Get dependencies
+        run: go mod download
+      - name: Test
+        run: go test ./...
+      - name: Build
+        run: |
+          GOOS=windows GOARCH=amd64 go build -o ${{ github.workspace }}/build/myapp_windows_amd64.exe
+          GOOS=darwin GOARCH=amd64 go build -o ${{ github.workspace }}/build/myapp_macos_amd64
+          GOOS=linux GOARCH=amd64 go build -o ${{ github.workspace }}/build/myapp_linux_amd64
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: executables
+          path: ${{ github.workspace }}/build/*

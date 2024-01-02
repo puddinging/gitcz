@@ -21,3 +21,6 @@ gitcz
 # Go workspace file
 go.work
 .idea
+
+# vscode
+.vscode

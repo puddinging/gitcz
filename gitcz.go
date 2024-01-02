@@ -3,13 +3,13 @@ package main
 import (
 	"bytes"
 	"errors"
-	"flag"
 	"fmt"
-	"github.com/peterh/liner"
 	"os"
 	"os/exec"
 	"strconv"
 	"strings"
+
+	"github.com/peterh/liner"
 )
 
 type CzCommit struct {
@@ -31,11 +31,11 @@ var (
 )
 
 func main() {
-	amend := flag.Bool(
-		"amend",
-		false,
-		"覆盖上次提交信息",
-	)
+	gitCz()
+}
+
+func gitCz() {
+	Init()
 	line := liner.NewLiner()
 	line.SetCtrlCAborts(true)
 	defer func(line *liner.State) {
@@ -44,17 +44,9 @@ func main() {
 			return
 		}
 	}(line)
-	sign := flag.Bool("S", false, "对commit进行签名")
-	Init()
-	czCommit := &CzCommit{}
-	czCommit.Type = InputType(line)
-	czCommit.Scope = InputScope(line)
-	czCommit.Subject = InputSubject(line)
-	czCommit.Body = InputBody(line)
-	czCommit.BreakingChange = InputBreakingChange(line)
-	czCommit.Closes = InputCloses(line)
-	commit := GenerateCommit(czCommit)
-	if err := GitCommit(commit, *amend, *sign); err != nil {
+	czCommit := UserOperate(line)
+	commit := GenerateCommit(&czCommit)
+	if err := GitCommit(commit); err != nil {
 		fmt.Println(err)
 	}
 }
@@ -63,7 +55,7 @@ func NewLine() {
 	fmt.Println()
 }
 
-func GitCommit(commit string, amend bool, sign bool) (err error) {
+func GitCommit(commit string) (err error) {
 	tempFile, err := os.CreateTemp("", "git_commit_")
 	if err != nil {
 		return
@@ -76,12 +68,6 @@ func GitCommit(commit string, amend bool, sign bool) (err error) {
 		return
 	}
 	args := []string{"commit"}
-	if amend {
-		args = append(args, "--amend")
-	}
-	if sign {
-		args = append(args, "-S")
-	}
 	args = append(args, "-F", tempFile.Name())
 	cmd := exec.Command("git", args...)
 	result, err := cmd.CombinedOutput()
@@ -225,6 +211,17 @@ func GenerateCommit(czCommit *CzCommit) string {
 		commit += "Closes fix " + *czCommit.Closes
 	}
 	return commit
+}
+
+func UserOperate(line *liner.State) CzCommit {
+	czCommit := &CzCommit{}
+	czCommit.Type = InputType(line)
+	czCommit.Scope = InputScope(line)
+	czCommit.Subject = InputSubject(line)
+	czCommit.Body = InputBody(line)
+	czCommit.BreakingChange = InputBreakingChange(line)
+	czCommit.Closes = InputCloses(line)
+	return *czCommit
 }
 
 /*

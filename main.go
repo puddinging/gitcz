@@ -1,7 +1,7 @@
 package main
 
-import "github.com/puddinging/gitcz/cmd"
+import "github.com/puddinging/gitcz/gitczcmd"
 
 func main() {
-	cmd.GitCz()
+	gitczcmd.GitCz()
 }

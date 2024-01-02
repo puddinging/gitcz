@@ -31,10 +31,10 @@ var (
 )
 
 func main() {
-	gitCz()
+	GitCz()
 }
 
-func gitCz() {
+func GitCz() {
 	Init()
 	line := liner.NewLiner()
 	line.SetCtrlCAborts(true)

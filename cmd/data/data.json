@@ -1,0 +1,142 @@
+[
+  {
+    "emoji": "庆祝",
+    "entity": "",
+    "code": ":tada:",
+    "description": "初次提交",
+    "name": "tada"
+  },
+  {
+    "emoji": "火花",
+    "entity": "✨",
+    "code": ":sparkles:",
+    "description": "引入新功能",
+    "name": "sparkles"
+  },
+  {
+    "emoji": "bug",
+    "entity": "&#x1f41b;",
+    "code": ":bug:",
+    "description": "修复bug",
+    "name": "bug"
+  },
+  {
+    "emoji": "备忘录",
+    "entity": "&#x1f4dd;",
+    "code": ":memo:",
+    "description": "撰写文档",
+    "name": "memo"
+  },
+  {
+    "emoji": "闪电",
+    "entity": "⚡",
+    "code": ":zap:",
+    "description": "提升性能",
+    "name": "zap"
+  },
+  {
+    "emoji": "循环箭头",
+    "entity": "♲",
+    "code": ":recycle:",
+    "description": "重构代码",
+    "name": "recycle"
+  },
+  {
+    "emoji": "蒙眼猴子",
+    "entity": "&#8bdfe7;",
+    "code": ":see_no_evil:",
+    "description": "添加或更新.gitignore文件",
+    "name": "see-no-evil"
+  },
+  {
+    "emoji": "地球",
+    "entity": "",
+    "code": ":globe_with_meridians:",
+    "description": "国际化与本地化",
+    "name": "globe-with-meridians"
+  },
+  {
+    "emoji": "扳手",
+    "entity": "&#x1f527;",
+    "code": ":wrench:",
+    "description": "修改配置文件",
+    "name": "wrench"
+  },
+  {
+    "emoji": "调色板",
+    "entity": "&#x1f3a8;",
+    "code": ":art:",
+    "description": "改进代码结构/代码格式",
+    "name": "art"
+  },
+  {
+    "emoji": "火焰",
+    "entity": "&#x1f525;",
+    "code": ":fire:",
+    "description": "移除代码或文件",
+    "name": "fire"
+  },
+  {
+    "emoji": "合并箭头",
+    "entity": "",
+    "code": ":twisted_rightwards_arrows:",
+    "description": "合并分支",
+    "name": "twisted-rightwards-arrows"
+  },
+  {
+    "emoji": "工人",
+    "entity": "&#x1f477;",
+    "code": ":construction_worker:",
+    "description": "修复ci构建问题",
+    "name": "construction-worker"
+  },
+  {
+    "emoji": "鲸鱼",
+    "entity": "&#x1f433;",
+    "code": ":whale:",
+    "description": "docker相关工作",
+    "name": "whale"
+  },
+  {
+    "emoji": "复选框",
+    "entity": "✅",
+    "code": ":white_check_mark:",
+    "description": "增加测试",
+    "name": "white-check-mark"
+  },
+  {
+    "emoji": "下降箭头",
+    "entity": "⬇️",
+    "code": ":arrow_down:",
+    "description": "降级依赖",
+    "name": "arrow-down"
+  },
+  {
+    "emoji": "上升箭头",
+    "entity": "⬆️",
+    "code": ":arrow_up:",
+    "description": "升级依赖",
+    "name": "arrow-up"
+  },
+  {
+    "emoji": "图钉",
+    "entity": "&#x1f4cc;",
+    "code": ":pushpin:",
+    "description": "将依赖关系固定到特定版本",
+    "name": "pushpin"
+  },
+  {
+    "emoji": "减号",
+    "entity": "➖",
+    "code": ":heavy_minus_sign:",
+    "description": "减少一个依赖",
+    "name": "heavy-minus-sign"
+  },
+  {
+    "emoji": "加号",
+    "entity": "➕",
+    "code": ":heavy_plus_sign:",
+    "description": "增加一个依赖",
+    "name": "heavy-plus-sign"
+  }
+]

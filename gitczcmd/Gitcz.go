@@ -23,7 +23,7 @@ type CzCommit struct {
 
 var (
 	InputTypePrompt           = "选择或输入一个提交类型(必填): "
-	InputScopePrompt          = "说明本次提交的影响范围(必填): "
+	InputScopePrompt          = "缺陷ID/需求ID(必填): "
 	InputSubjectPrompt        = "对本次提交进行简短描述(必填): "
 	InputBodyPrompt           = "对本次提交进行完整描述(选填): "
 	InputBreakingChangePrompt = "如果当前代码版本与上一版本不兼容,对变动、变动的理由及迁移的方法进行描述(选填): "

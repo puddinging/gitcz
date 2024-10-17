@@ -219,12 +219,3 @@ func UserOperate(line *liner.State) CzCommit {
 	czCommit.Closes = InputCloses(line)
 	return *czCommit
 }
-
-/*
-*
-打印帮助信息
-*/
-func help() {
-	print("打印帮助信息")
-	print("打印帮助信息")
-}

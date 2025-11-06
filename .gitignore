@@ -24,3 +24,7 @@ go.work
 
 # vscode
 .vscode
+
+.specstory
+
+.cursorindexingignore

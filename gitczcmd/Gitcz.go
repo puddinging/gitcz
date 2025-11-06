@@ -104,20 +104,22 @@ func InputType(line *liner.State) *CzType {
 }
 
 func InputScope(line *liner.State) *string {
-	text, err := line.Prompt(InputScopePrompt)
+	// 获取当前 Git 分支名称
+	cmd := exec.Command("git", "branch", "--show-current")
+	output, err := cmd.Output()
 	if err != nil {
-		if errors.Is(err, liner.ErrPromptAborted) {
-			fmt.Println("\nAborted")
-			os.Exit(0)
-		}
+		fmt.Println("获取分支名称失败:", err)
+		os.Exit(1)
 	}
-	text = strings.TrimSpace(text)
-	if text != "" {
-		NewLine()
-		return &text
+	branchName := strings.TrimSpace(string(output))
+	if branchName == "" {
+		fmt.Println("无法获取当前分支名称")
+		os.Exit(1)
 	}
 	NewLine()
-	return InputScope(line)
+	fmt.Printf("当前分支: %s\n", branchName)
+	NewLine()
+	return &branchName
 }
 
 func InputSubject(line *liner.State) *string {
